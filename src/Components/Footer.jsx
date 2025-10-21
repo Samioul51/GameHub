@@ -45,7 +45,7 @@ const Footer = () => {
                     </ul>
                 </div>
 
-                <div className="w-full max-w-[1440px] h-[1px] bg-[#E5E7EB] mb-[30px]"></div>
+                <div className="w-full max-w-[1440px] h-px bg-[#E5E7EB] mb-[30px]"></div>
 
                 <p className="text-center text-[#FAFAFA] mb-[30px]">Copyright &copy; 2025. All rights reserved.</p>
             </footer>
