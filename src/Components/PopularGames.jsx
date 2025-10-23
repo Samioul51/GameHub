@@ -1,9 +1,9 @@
 import React from 'react';
 import Game from './Game';
 
-const PopularGames = ({apps}) => {
-    const sorted=apps.sort((a,b)=>b.ratings-a.ratings);
-    console.log(sorted);
+const PopularGames = ({games}) => {
+    const sorted=games.sort((a,b)=>b.ratings-a.ratings);
+    // console.log(sorted);
     return (
         <div className='w-full max-w-[1440px] flex flex-col items-center my-[20px] mx-auto'>
             <p className='text-center text-[32px] font-bold bg-linear-to-r from-[#632EE3] to-[#9F62F2] bg-clip-text text-transparent mb-[10px]'>POPULAR GAMES</p>

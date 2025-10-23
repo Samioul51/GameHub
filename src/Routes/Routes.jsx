@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router';
 import RootLayout from '../Layouts/RootLayout';
-import Home from '../Components/Home';
+import Home from '../Pages/Home';
 import ErrorPage from '../Pages/ErrorPage';
 import Apps from '../Pages/Apps';
 import Installations from '../Pages/Installations';
@@ -23,7 +23,8 @@ const router =createBrowserRouter([
             },
             {
                 path:"/apps",
-                Component:Apps
+                Component:Apps,
+                loader:()=>fetch('/data.json'),
             },
             {
                 path:"/installations",
