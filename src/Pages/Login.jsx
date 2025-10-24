@@ -1,30 +1,27 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router';
 import { FaGoogle } from "react-icons/fa";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import app from '../firebase/firebase.init';
+import { toast } from 'react-toastify';
+import { AuthContext } from '../Provider/AuthProvider';
 
 const Login = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const auth = getAuth(app);
+    const { signIn } = use(AuthContext);
 
-    const handleLogin=(e)=>{
+    const handleLogin = (e) => {
         e.preventDefault();
-        signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            // ...
-            alert("User Logged In Successfully");
-        })
-        .catch((error) => {
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        signIn(email,password).then((res) => {
+            const user = res.user;
+            toast("Logged In Successfully!");
+        }).catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
+            toast(errorCode,errorMessage);
         });
-
     }
-    
+
 
     return (
         <div className='w-full bg-[#f5f5f5]'>
@@ -34,10 +31,10 @@ const Login = () => {
                     <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
                         <form onSubmit={handleLogin} className="w-full card-body">
                             <fieldset className="fieldset">
-                                <label className="label">Email</label>
-                                <input type="email" className="input" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                                <label className="label">Password</label>
-                                <input type="password" className="input" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                                <label className="email">Email</label>
+                                <input name="email" type="email" className="input" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                                <label className="password">Password</label>
+                                <input name="password" type="password" className="input" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                                 <div className='w-full max-w-[320px] flex justify-between'>
                                     <Link className="link link-hover">Forgot password?</Link>
                                     <Link to="/register" className="link link-hover">Register</Link>

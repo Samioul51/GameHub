@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { use } from 'react';
 import { NavLink } from 'react-router';
 import logo from '../assets/logo.png';
+import { AuthContext } from '../Provider/AuthProvider';
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
+    const {user,logout}=use(AuthContext);
+    console.log(user);
+    const handleLogout=()=>{
+        logout().then(()=>{
+            toast("Logged Out Successfully!");
+        }).catch((error)=>{
+            toast(error);
+        });
+    };
     return (
         <div>
             <nav
@@ -31,8 +42,11 @@ const Navbar = () => {
                 `}>
                         Installations
                     </NavLink>
-                    <NavLink to="/login" className="flex gap-[10px] w-full max-w-[145px] h-[43px] justify-center items-center bg-linear-to-r from-[#632EE3] to-[#9F62F2] rounded-[4px] cursor-pointer text-white">Login</NavLink>
-                    <NavLink to="/register" className="flex gap-[10px] w-full max-w-[145px] h-[43px] justify-center items-center bg-linear-to-r from-[#632EE3] to-[#9F62F2] rounded-[4px] cursor-pointer text-white">Register</NavLink>
+                    {
+                        user ? (<NavLink onClick={handleLogout} className="flex gap-[10px] w-full max-w-[145px] h-[43px] justify-center items-center bg-linear-to-r from-[#632EE3] to-[#9F62F2] rounded-[4px] cursor-pointer text-white">Logout</NavLink>):( <><NavLink to="/login" className="flex gap-[10px] w-full max-w-[145px] h-[43px] justify-center items-center bg-linear-to-r from-[#632EE3] to-[#9F62F2] rounded-[4px] cursor-pointer text-white">Login</NavLink>
+                    <NavLink to="/register" className="flex gap-[10px] w-full max-w-[145px] h-[43px] justify-center items-center bg-linear-to-r from-[#632EE3] to-[#9F62F2] rounded-[4px] cursor-pointer text-white">Register</NavLink></>)
+                    }
+                    
                 </ul>
 
             </nav>
