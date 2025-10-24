@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router';
+import React, { use } from 'react';
+import { Link, useNavigate } from 'react-router';
 import { FaGoogle } from "react-icons/fa";
 import { toast } from 'react-toastify';
 import { AuthContext } from '../Provider/AuthProvider';
 
 const Login = () => {
     const { signIn } = use(AuthContext);
+    const navigate=useNavigate();
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -15,6 +16,7 @@ const Login = () => {
         signIn(email,password).then((res) => {
             const user = res.user;
             toast("Logged In Successfully!");
+            navigate("/");
         }).catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
@@ -32,9 +34,9 @@ const Login = () => {
                         <form onSubmit={handleLogin} className="w-full card-body">
                             <fieldset className="fieldset">
                                 <label className="email">Email</label>
-                                <input name="email" type="email" className="input" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                                <input name="email" type="email" className="input" placeholder="Email" required />
                                 <label className="password">Password</label>
-                                <input name="password" type="password" className="input" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                                <input name="password" type="password" className="input" placeholder="Password" required />
                                 <div className='w-full max-w-[320px] flex justify-between'>
                                     <Link className="link link-hover">Forgot password?</Link>
                                     <Link to="/register" className="link link-hover">Register</Link>

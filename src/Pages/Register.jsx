@@ -1,11 +1,12 @@
 import React, { use } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { FaGoogle } from "react-icons/fa";
 import { AuthContext } from '../Provider/AuthProvider';
 import { toast } from 'react-toastify';
 
 const Register = () => {
     const { createUser,setUser } = use(AuthContext);
+    const navigate=useNavigate();
 
     const handleRegister = (e) => {
         e.preventDefault();
@@ -19,10 +20,12 @@ const Register = () => {
         createUser(email, password).then(res => {
             const user = res.user;
             setUser(user);
+            toast("Registered Successfully!");
+            navigate("/");
         }).catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            toast(errorMessage);
+            toast(errorCode,errorMessage);
             // ..
         });
 

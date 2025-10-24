@@ -3,7 +3,7 @@ import Banner from '../Components/Banner';
 import PopularGames from '../Components/PopularGames';
 import Newsletter from '../Components/Newsletter';
 
-const dataPromise=fetch('data.json').then(res=>res.json());
+const dataPromise=fetch('/data.json').then(res=>res.json());
 
 const Home = () => {
     const games=use(dataPromise);

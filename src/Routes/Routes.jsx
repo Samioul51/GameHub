@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { createBrowserRouter } from 'react-router';
 import RootLayout from '../Layouts/RootLayout';
 import Home from '../Pages/Home';
 import ErrorPage from '../Pages/ErrorPage';
 import Apps from '../Pages/Apps';
-import Installations from '../Pages/Installations';
 import Login from '../Pages/Login';
 import Register from '../Pages/Register';
+import GameDetails from '../Pages/GameDetails';
 
 const router =createBrowserRouter([
     {
@@ -27,16 +27,17 @@ const router =createBrowserRouter([
                 loader:()=>fetch('/data.json'),
             },
             {
-                path:"/installations",
-                Component:Installations
-            },
-            {
                 path:"/login",
                 Component:Login
             },
             {
                 path:"/register",
                 Component:Register
+            },
+            {
+                path:"/gamedetails/:id",
+                loader:()=>fetch("/data.json"),
+                Component:GameDetails
             },
             {
                 path:"*",
