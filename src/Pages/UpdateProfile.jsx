@@ -53,7 +53,7 @@ const UpdateProfile = () => {
                             {
                                 options && <p className='text-xs text-red-500'>{options}</p>
                             }
-                            <button type="submit" className="mx-auto border-0 mt-4 w-full max-w-[145px] h-[43px] justify-center items-center bg-linear-to-r from-[#632EE3] to-[#9F62F2] rounded-[4px] cursor-pointer text-white ">Confirm Update</button>
+                            <button type="submit" className="mx-auto border-0 mt-4 w-full max-w-[145px] h-[43px] justify-center items-center bg-linear-to-r from-[#632EE3] to-[#9F62F2] rounded-[4px] cursor-pointer text-white ">Update Information</button>
                         </fieldset>
                     </form>
                 </div>
