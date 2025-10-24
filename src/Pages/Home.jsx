@@ -27,7 +27,7 @@ const Home = () => {
                 }}
             />
             <div className='w-full bg-[#f5f5f5]'>
-
+                <title>{`GameHub | Home`}</title>
                 <motion.div initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.3 }}
