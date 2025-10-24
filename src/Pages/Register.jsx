@@ -62,9 +62,7 @@ const Register = () => {
                                 <input name="name" type="text" className="input" placeholder="Name" required />
                                 <label className="email">Email</label>
                                 <input name="email" type="email" className="input" placeholder="Email" required />
-                                {
-                                    usedEmail && <p className='text-xs text-red-500'>{usedEmail}</p>
-                                }
+                                
                                 <label className="photo">Photo URL</label>
                                 <input name="photo" type="url" className="input" placeholder="Photo URL" required />
                                 <label className="password">Password</label>
