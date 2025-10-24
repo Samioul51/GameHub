@@ -1,11 +1,12 @@
 import React, { use } from 'react';
-import { Link, useNavigate } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { FaGoogle } from "react-icons/fa";
 import { toast } from 'react-toastify';
 import { AuthContext } from '../Provider/AuthProvider';
 
 const Login = () => {
     const { signIn } = use(AuthContext);
+    const location=useLocation();
     const navigate=useNavigate();
 
     const handleLogin = (e) => {
@@ -16,7 +17,7 @@ const Login = () => {
         signIn(email,password).then((res) => {
             const user = res.user;
             toast("Logged In Successfully!");
-            navigate("/");
+            navigate(`${location.state?location.state:"/"}`);
         }).catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;

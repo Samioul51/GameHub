@@ -7,6 +7,7 @@ import Apps from '../Pages/Apps';
 import Login from '../Pages/Login';
 import Register from '../Pages/Register';
 import GameDetails from '../Pages/GameDetails';
+import PrivateRoute from '../Provider/PrivateRoute';
 
 const router =createBrowserRouter([
     {
@@ -37,7 +38,9 @@ const router =createBrowserRouter([
             {
                 path:"/gamedetails/:id",
                 loader:()=>fetch("/data.json"),
-                Component:GameDetails
+                element:<PrivateRoute>
+                    <GameDetails></GameDetails>
+                </PrivateRoute>
             },
             {
                 path:"*",
