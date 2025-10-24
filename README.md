@@ -1,6 +1,9 @@
 # Project Name: GameHub
 
-## Purpose: An engaging online library for discovering and supporting game developers. Users can browse indie games, see detailed information, and install if you like them
+## Live Link: 
+
+## Purpose: 
+An engaging online library for discovering and supporting game developers. Users can browse indie games, see detailed information, and install if you like them.
 
 ## Key Features:
 - **Homepage**
