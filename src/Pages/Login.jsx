@@ -5,10 +5,13 @@ import { toast } from 'react-toastify';
 import { AuthContext } from '../Provider/AuthProvider';
 
 const Login = () => {
-    const { signIn } = use(AuthContext);
+    const { signIn,signInWithGoogle } = use(AuthContext);
     const location=useLocation();
     const navigate=useNavigate();
-
+    
+    
+    // login with email and password 
+    
     const handleLogin = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -25,6 +28,18 @@ const Login = () => {
         });
     }
 
+    // login with google
+
+    const handleGoogleLogin=()=>{
+        signInWithGoogle().then((res)=>{
+            toast("Logged in with Google!");
+            navigate(`${location.state?location.state:"/"}`);
+        }).catch((error)=>{
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            toast(errorCode,errorMessage);
+        });
+    };
 
     return (
         <div className='w-full bg-[#f5f5f5]'>
@@ -43,9 +58,9 @@ const Login = () => {
                                     <Link to="/register" className="link link-hover">Register</Link>
                                 </div>
                                 <button type="submit" className="btn btn-neutral mt-4 border-none bg-linear-to-r from-[#632EE3] to-[#9F62F2]">Login</button>
-                                <Link className="btn btn-neutral mt-4 border-none bg-linear-to-r from-[#632EE3] to-[#9F62F2]"><FaGoogle /> Continue with Google</Link>
                             </fieldset>
                         </form>
+                        <button onClick={handleGoogleLogin} className="w-full max-w-[336px] mx-auto mb-[20px] btn btn-neutral border-none bg-linear-to-r from-[#632EE3] to-[#9F62F2]"><FaGoogle /> Continue with Google</button>
                     </div>
                 </div>
             </div>
