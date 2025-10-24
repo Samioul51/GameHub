@@ -36,7 +36,7 @@ const UpdateProfile = () => {
         updateUser(updatedData).then(() => {
             setUser({ ...user, displayName: name || user.displayName, photoURL: photo || user.photoURL });
             toast("Profile updated successfully!")
-            navigate("/");
+            navigate("/profile");
         }).catch((error) => {
             toast("Failed to update profile: ", error.message);
         });

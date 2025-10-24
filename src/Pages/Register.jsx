@@ -33,8 +33,6 @@ const Register = () => {
         const photo = form.photo.value;
         const password = form.password.value;
         // console.log(name,email,photo,password);
-
-        const { scrollYProgress } = useScroll();
         // password validation
 
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
