@@ -39,8 +39,8 @@ const Navbar = () => {
                     {
                         user ? (
                         <>
+                            <img src={user.photoURL} className="w-[40px] h-[40px] rounded-[50%]"/>
                             <NavLink onClick={handleLogout} className="flex gap-[10px] w-full max-w-[145px] h-[43px] justify-center items-center bg-linear-to-r from-[#632EE3] to-[#9F62F2] rounded-[4px] cursor-pointer text-white">Logout</NavLink>
-                            <NavLink className="flex gap-[10px] w-full max-w-[145px] h-[43px] justify-center items-center bg-linear-to-r from-[#632EE3] to-[#9F62F2] rounded-[4px] cursor-pointer text-white">Logout</NavLink>
                         </>
                         ):( 
                         <>

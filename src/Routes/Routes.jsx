@@ -8,6 +8,9 @@ import Login from '../Pages/Login';
 import Register from '../Pages/Register';
 import GameDetails from '../Pages/GameDetails';
 import PrivateRoute from '../Provider/PrivateRoute';
+import MyProfile from '../Pages/MyProfile';
+import UpdateProfile from '../Pages/UpdateProfile';
+import PublicRoute from '../Provider/PublicRoute';
 
 const router =createBrowserRouter([
     {
@@ -29,17 +32,33 @@ const router =createBrowserRouter([
             },
             {
                 path:"/login",
-                Component:Login
+                element:<PublicRoute>
+                    <Login></Login>
+                </PublicRoute>
             },
             {
                 path:"/register",
-                Component:Register
+                element:<PublicRoute>
+                    <Register></Register>
+                </PublicRoute>
             },
             {
                 path:"/gamedetails/:id",
                 loader:()=>fetch("/data.json"),
                 element:<PrivateRoute>
                     <GameDetails></GameDetails>
+                </PrivateRoute>
+            },
+            {
+                path:"/profile",
+                element:<PrivateRoute>
+                    <MyProfile></MyProfile>
+                </PrivateRoute>
+            },
+            {
+                path:"/updateprofile",
+                element:<PrivateRoute>
+                    <UpdateProfile></UpdateProfile>
                 </PrivateRoute>
             },
             {

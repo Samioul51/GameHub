@@ -1,13 +1,13 @@
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { FaGoogle } from "react-icons/fa";
 import { AuthContext } from '../Provider/AuthProvider';
 import { toast } from 'react-toastify';
 
 const Register = () => {
-    const { createUser,setUser } = use(AuthContext);
+    const { createUser,setUser,updateUser } = use(AuthContext);
     const navigate=useNavigate();
-
+    const [error,setError]=useState("");
     const handleRegister = (e) => {
         e.preventDefault();
         // console.log(e.target);
@@ -17,16 +17,36 @@ const Register = () => {
         const photo = form.photo.value;
         const password = form.password.value;
         // console.log(name,email,photo,password);
+
+        // password validation
+
+        const passwordRegex=/^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
+        if(!passwordRegex.test(password)){
+            setError("Password must be at least 6 characters. Include uppercase and lowercase letters.")
+            return;
+        }
+        else
+            setError("");
+
         createUser(email, password).then(res => {
             const user = res.user;
-            setUser(user);
+            updateUser({
+                displayName:name,
+                photoURL:photo
+            }).then(()=>{
+                setUser({...user,displayName:name,photoURL:photo});
+            }).catch((error)=>{
+                toast(error);
+                setUser(user);
+            });
+            
             toast("Registered Successfully!");
             navigate("/");
         }).catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            toast(errorCode,errorMessage);
-            // ..
+            toast(errorMessage);
         });
 
     }
@@ -42,10 +62,16 @@ const Register = () => {
                                 <input name="name" type="text" className="input" placeholder="Name" required />
                                 <label className="email">Email</label>
                                 <input name="email" type="email" className="input" placeholder="Email" required />
+                                {
+                                    usedEmail && <p className='text-xs text-red-500'>{usedEmail}</p>
+                                }
                                 <label className="photo">Photo URL</label>
                                 <input name="photo" type="url" className="input" placeholder="Photo URL" required />
                                 <label className="password">Password</label>
                                 <input name="password" type="password" className="input" placeholder="Password" required />
+                                {
+                                    error && <p className='text-xs text-red-500'>{error}</p>
+                                }
                                 <div>
                                     <Link to="/login" className="link link-hover">Back to Login</Link>
                                 </div>
