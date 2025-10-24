@@ -11,6 +11,7 @@ import PrivateRoute from '../Provider/PrivateRoute';
 import MyProfile from '../Pages/MyProfile';
 import UpdateProfile from '../Pages/UpdateProfile';
 import PublicRoute from '../Provider/PublicRoute';
+import ForgetPassword from '../Pages/ForgetPassword';
 
 const router =createBrowserRouter([
     {
@@ -60,6 +61,12 @@ const router =createBrowserRouter([
                 element:<PrivateRoute>
                     <UpdateProfile></UpdateProfile>
                 </PrivateRoute>
+            },
+            {
+                path:"/forgotpassword",
+                element:<PublicRoute>
+                    <ForgetPassword></ForgetPassword>
+                </PublicRoute>
             },
             {
                 path:"*",

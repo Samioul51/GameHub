@@ -5,9 +5,23 @@ import { AuthContext } from '../Provider/AuthProvider';
 import { toast } from 'react-toastify';
 
 const Register = () => {
-    const { createUser,setUser,updateUser } = use(AuthContext);
-    const navigate=useNavigate();
-    const [error,setError]=useState("");
+    const { createUser, setUser, updateUser, signInWithGoogle } = use(AuthContext);
+    const navigate = useNavigate();
+    const [error, setError] = useState("");
+
+    // register with google
+
+    const handleGoogleRegister = () => {
+        signInWithGoogle().then((res) => {
+            toast("Logged in with Google!");
+            navigate(`${location.state ? location.state : "/"}`);
+        }).catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            toast(errorCode, errorMessage);
+        });
+    };
+
     const handleRegister = (e) => {
         e.preventDefault();
         // console.log(e.target);
@@ -20,9 +34,9 @@ const Register = () => {
 
         // password validation
 
-        const passwordRegex=/^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 
-        if(!passwordRegex.test(password)){
+        if (!passwordRegex.test(password)) {
             setError("Password must be at least 6 characters. Include uppercase and lowercase letters.")
             return;
         }
@@ -32,19 +46,18 @@ const Register = () => {
         createUser(email, password).then(res => {
             const user = res.user;
             updateUser({
-                displayName:name,
-                photoURL:photo
-            }).then(()=>{
-                setUser({...user,displayName:name,photoURL:photo});
-            }).catch((error)=>{
+                displayName: name,
+                photoURL: photo
+            }).then(() => {
+                setUser({ ...user, displayName: name, photoURL: photo });
+            }).catch((error) => {
                 toast(error);
                 setUser(user);
             });
-            
+
             toast("Registered Successfully!");
             navigate("/");
         }).catch((error) => {
-            const errorCode = error.code;
             const errorMessage = error.message;
             toast(errorMessage);
         });
@@ -62,7 +75,7 @@ const Register = () => {
                                 <input name="name" type="text" className="input" placeholder="Name" required />
                                 <label className="email">Email</label>
                                 <input name="email" type="email" className="input" placeholder="Email" required />
-                                
+
                                 <label className="photo">Photo URL</label>
                                 <input name="photo" type="url" className="input" placeholder="Photo URL" required />
                                 <label className="password">Password</label>
@@ -74,9 +87,10 @@ const Register = () => {
                                     <Link to="/login" className="link link-hover">Back to Login</Link>
                                 </div>
                                 <button type="submit" className="btn btn-neutral mt-4 border-none bg-linear-to-r from-[#632EE3] to-[#9F62F2]">Register</button>
-                                <Link className="btn btn-neutral mt-4 border-none bg-linear-to-r from-[#632EE3] to-[#9F62F2]"><FaGoogle /> Continue with Google</Link>
+                                
                             </fieldset>
                         </form>
+                        <button onClick={handleGoogleRegister} className="w-full max-w-[336px] mx-auto mb-[20px] btn btn-neutral border-none bg-linear-to-r from-[#632EE3] to-[#9F62F2]"><FaGoogle /> Continue with Google</button>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { FaGoogle } from "react-icons/fa";
 import { toast } from 'react-toastify';
@@ -6,6 +6,7 @@ import { AuthContext } from '../Provider/AuthProvider';
 
 const Login = () => {
     const { signIn,signInWithGoogle } = use(AuthContext);
+    const [email,setEmail]=useState("");
     const location=useLocation();
     const navigate=useNavigate();
     
@@ -50,11 +51,11 @@ const Login = () => {
                         <form onSubmit={handleLogin} className="w-full card-body">
                             <fieldset className="fieldset">
                                 <label className="email">Email</label>
-                                <input name="email" type="email" className="input" placeholder="Email" required />
+                                <input name="email" type="email" className="input" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)} required />
                                 <label className="password">Password</label>
                                 <input name="password" type="password" className="input" placeholder="Password" required />
                                 <div className='w-full max-w-[320px] flex justify-between'>
-                                    <Link className="link link-hover">Forgot password?</Link>
+                                    <Link to="/forgotpassword" state={{email}} className="link link-hover">Forgot password?</Link>
                                     <Link to="/register" className="link link-hover">Register</Link>
                                 </div>
                                 <button type="submit" className="btn btn-neutral mt-4 border-none bg-linear-to-r from-[#632EE3] to-[#9F62F2]">Login</button>
