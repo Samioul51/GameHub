@@ -1,17 +1,22 @@
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
 import { NavLink } from 'react-router';
 import logo from '../assets/logo.png';
 import { AuthContext } from '../Provider/AuthProvider';
 import { toast } from 'react-toastify';
 
 const Navbar = () => {
-    const {user,logout}=use(AuthContext);
+    const { user, logout } = use(AuthContext);
+
+    const handleOpenModal=()=>document.getElementById("my_modal_5").showModal();
+    const handleCloseModal=()=>document.getElementById("my_modal_5").close();
     // console.log(user);
-    const handleLogout=()=>{
-        logout().then(()=>{
+    const handleLogout = () => {
+        logout().then(() => {
             toast("Logged Out Successfully!");
-        }).catch((error)=>{
+            handleCloseModal();
+        }).catch((error) => {
             toast(error);
+            handleCloseModal();
         });
     };
     return (
@@ -38,21 +43,36 @@ const Navbar = () => {
                     </NavLink>
                     {
                         user ? (
-                        <>
-                            <NavLink to="/profile"><img src={user.photoURL} className="w-[40px] h-[40px] rounded-[50%]"/></NavLink>
-                            <NavLink onClick={handleLogout} className="flex gap-[10px] w-full max-w-[145px] h-[43px] justify-center items-center bg-linear-to-r from-[#632EE3] to-[#9F62F2] rounded-[4px] cursor-pointer text-white">Logout</NavLink>
-                        </>
-                        ):( 
-                        <>
-                            <NavLink to="/login" className="flex gap-[10px] w-full max-w-[145px] h-[43px] justify-center items-center bg-linear-to-r from-[#632EE3] to-[#9F62F2] rounded-[4px] cursor-pointer text-white">Login</NavLink>
-                            <NavLink to="/register" className="flex gap-[10px] w-full max-w-[145px] h-[43px] justify-center items-center bg-linear-to-r from-[#632EE3] to-[#9F62F2] rounded-[4px] cursor-pointer text-white">Register</NavLink>
-                        </>
+                            <>
+                                <NavLink to="/profile"><img src={user.photoURL} className="w-[40px] h-[40px] rounded-[50%]" /></NavLink>
+                                <NavLink onClick={handleOpenModal} className="flex gap-[10px] w-full max-w-[145px] h-[43px] justify-center items-center bg-linear-to-r from-[#632EE3] to-[#9F62F2] rounded-[4px] cursor-pointer text-white">Logout</NavLink>
+                            </>
+                        ) : (
+                            <>
+                                <NavLink to="/login" className="flex gap-[10px] w-full max-w-[145px] h-[43px] justify-center items-center bg-linear-to-r from-[#632EE3] to-[#9F62F2] rounded-[4px] cursor-pointer text-white">Login</NavLink>
+                                <NavLink to="/register" className="flex gap-[10px] w-full max-w-[145px] h-[43px] justify-center items-center bg-linear-to-r from-[#632EE3] to-[#9F62F2] rounded-[4px] cursor-pointer text-white">Register</NavLink>
+                            </>
                         )
                     }
-                    
+
                 </ul>
 
             </nav>
+
+            {/* Modal for logout */}
+
+            <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                <div className="modal-box">
+                    <p className="py-4">Are you sure you want to logout?</p>
+                    <div className="modal-action">
+                        <form method="dialog">
+                            <button onClick={handleLogout} className="btn">Yes</button>
+                            <button onClick={handleCloseModal} className="btn">No</button>
+                        
+                        </form>
+                    </div>
+                </div>
+            </dialog>
         </div>
     );
 };

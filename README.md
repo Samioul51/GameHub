@@ -1,16 +1,48 @@
-# React + Vite
+# Project Name: GameHub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Purpose: An engaging online library for discovering and supporting game developers. Users can browse indie games, see detailed information, and install if you like them
 
-Currently, two official plugins are available:
+## Key Features:
+- **Homepage**
+    - Banner slider with 3+ game slides
+    - Popular games section sorted by ratings
+    - Newsletter subscription section
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Game Details Page (Protected)**
+  - Full game details including description, developer, ratings,and download link
+  - Accessible only for logged-in users
 
-## React Compiler
+- **Authentication**
+  - Email/password login and registration
+  - Google login
+  - Password validation (min 6 chars, uppercase and lowercase)
+  - Forgot password functionality
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **User Profile**
+  - View profile information (Name, Email, Photo)
+  - Update Name and Photo URL
+  - Logout functionality
 
-## Expanding the ESLint configuration
+- **Routing & Navigation**
+  - Dynamic tab titles
+  - 404 Page
+  - Additional custom route (Show all games)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Animations**
+  - Smooth transitions using Framer Motion
+  - Hover effects for game cards
+  - Banner slider animation
+
+- **Responsive Design**
+  - Mobile, tablet, and desktop optimized
+
+
+## NPM packages
+    - Tailwind CSS
+    - Daisy UI
+    - React Router
+    - Motion
+    - React Toastify
+    - Swiper JS
+    - React Icons
+    - Firebase
