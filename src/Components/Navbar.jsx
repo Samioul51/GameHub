@@ -1,4 +1,4 @@
-import React, { use, useState } from 'react';
+import React, { use } from 'react';
 import { NavLink } from 'react-router';
 import logo from '../assets/logo.png';
 import { AuthContext } from '../Provider/AuthProvider';

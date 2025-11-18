@@ -23,7 +23,7 @@ const Home = () => {
                     height: 10,
                     originX: 0,
                     backgroundColor: "#ff0088",
-                    zIndex:9999
+                    zIndex: 9999
                 }}
             />
             <div className='w-full bg-[#f5f5f5]'>
@@ -34,12 +34,7 @@ const Home = () => {
                     transition={{ duration: 0.8 }}>
                     <Banner />
                 </motion.div>
-                <motion.div initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.8 }}>
-                    <PopularGames games={games} />
-                </motion.div>
+                <PopularGames games={games} />
                 <motion.div initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.3 }}
