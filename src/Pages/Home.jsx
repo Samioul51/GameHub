@@ -3,11 +3,14 @@ import Banner from '../Components/Banner';
 import PopularGames from '../Components/PopularGames';
 import Newsletter from '../Components/Newsletter';
 import { motion, useScroll } from 'motion/react';
+import Events from '../Components/Events';
 
 const dataPromise = fetch('/data.json').then(res => res.json());
+const eventsPromise = fetch('/events.json').then(res => res.json());
 
 const Home = () => {
     const games = use(dataPromise);
+    const events = use(eventsPromise);
     const { scrollYProgress } = useScroll();
     // console.log(apps);
     return (
@@ -30,6 +33,7 @@ const Home = () => {
                 <title>{`GameHub | Home`}</title>
                 <Banner />
                 <PopularGames games={games} />
+                <Events events={events} />
                 <Newsletter />
             </div>
         </>

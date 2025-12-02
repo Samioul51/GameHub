@@ -1,0 +1,46 @@
+[
+  {
+    "id": "1",
+    "title": "Game Developers Session 2025",
+    "coverPhoto": "https://www.gameconfguide.com/wp-content/uploads/2025/03/game-developers-session-2025-logo.png",
+    "location": "Prague, Czech Republic",
+    "description": "Game Developers Session is the oldest Central European conference dedicated to games development, game technologies, business and marketing.",
+    "website": "https://www.gdsession.com",
+    "attendance": 3000,
+    "pricePass": "$179",
+    "date": "5 Dec 2025"
+  },
+  {
+    "id": "2",
+    "title": "Playtopia Festival 2025",
+    "coverPhoto": "https://www.gameconfguide.com/wp-content/uploads/2025/05/playtopia-festival-2025-logo.png",
+    "location": "Cape Town, South Africa",
+    "description": "It is a gathering of South African and global creators and players, where we celebrate the African “scene”. A place for people to come together to share ideas, connect across continents and disciplines, and to exhibit work.",
+    "website": "https://playtopiafestival.co.za",
+    "attendance": 5000,
+    "pricePass": "$350",
+    "date": "6 Dec 2025"
+  },
+  {
+    "id": "3",
+    "title": "Out of Index 2025",
+    "coverPhoto": "https://www.gameconfguide.com/wp-content/uploads/2025/11/out-of-index-2025-logo.png",
+    "location": "Seoul, South Korea",
+    "description": "OOI is an experimental game festival. The main idea of the festival is to inspire the game industry with new ideas and experimental energy.",
+    "website": "https://www.outofindex.org/",
+    "attendance": 6000,
+    "pricePass": "$150",
+    "date": "7 Dec 2025"
+  },
+  {
+    "id": "4",
+    "title": "Boston FIG Festival 2025",
+    "coverPhoto": "https://www.gameconfguide.com/wp-content/uploads/2025/08/boston-fig-festival-2025-logo.png",
+    "location": "Boston, Massachusetts",
+    "description": "Boston Festival of Indie games is back.",
+    "website": "https://www.bostonfig.com/fest-homepage/",
+    "attendance": 10000,
+    "pricePass": "$30",
+    "date": "15 Dec 2025"
+  }
+]
