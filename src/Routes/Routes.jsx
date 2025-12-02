@@ -46,9 +46,7 @@ const router =createBrowserRouter([
             {
                 path:"/gamedetails/:id",
                 loader:()=>fetch("/data.json"),
-                element:<PrivateRoute>
-                    <GameDetails></GameDetails>
-                </PrivateRoute>
+                element:<GameDetails></GameDetails>
             },
             {
                 path:"/profile",

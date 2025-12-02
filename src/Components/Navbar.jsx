@@ -20,9 +20,9 @@ const Navbar = () => {
         });
     };
     return (
-        <div>
+        <div className='sticky top-0 z-50 shadow-2xl'>
             <nav
-                className="inter w-full bg-[#FFFFFF] flex flex-col items-center h-auto gap-[20px] sm:justify-center py-[10px]  lg:py-0 lg:justify-between  lg:flex-row lg:h-[91px] lg:px-[50px] top-0">
+                className="inter w-full bg-[#FFFFFF] flex flex-col items-center h-auto gap-[20px] sm:justify-center py-[10px]  lg:py-0 lg:justify-between  lg:flex-row lg:h-[91px] lg:px-[50px]">
                 <div className='flex gap-[4px] justify-center items-center cursor-pointer'>
                     <NavLink to="/">
                         <img src={logo} className="w-full h-[40px]" />
