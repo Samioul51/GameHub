@@ -24,13 +24,14 @@ const Register = () => {
         });
     };
 
-    const handleRegister = (e) => {
+    const handleRegister = async (e) => {
         e.preventDefault();
         // console.log(e.target);
         const form = e.target;
         const name = form.name.value;
         const email = form.email.value;
-        const photo = form.photo.value;
+        // const photo = form.photo.value;
+        const photoFile=form.photo.files[0];
         const password = form.password.value;
         // console.log(name,email,photo,password);
         // password validation
@@ -44,24 +45,56 @@ const Register = () => {
         else
             setError("");
 
-        createUser(email, password).then(res => {
-            const user = res.user;
-            updateUser({
-                displayName: name,
-                photoURL: photo
-            }).then(() => {
-                setUser({ ...user, displayName: name, photoURL: photo });
-            }).catch((error) => {
-                toast(error);
-                setUser(user);
+        try{
+            const formData=new FormData();
+            formData.append("image",photoFile);
+            
+            const imgbb=import.meta.env.VITE_image_host;
+
+            const res=await fetch(`https://api.imgbb.com/1/upload?key=${imgbb}`,{
+                method:"POST",
+                body:formData
             });
+
+            const data=await res.json();
+
+            const photoURL=data.data.url;
+
+            const result=await createUser(email,password);
+            const user=result.user;
+
+            await updateUser({
+                displayName:name,
+                photoURL:photoURL
+            });
+
+            setUser({...user,displayName:name,photoURL});
 
             toast("Registered Successfully!");
             navigate("/");
-        }).catch((error) => {
-            const errorMessage = error.message;
-            toast(errorMessage);
-        });
+        }
+        catch(error){
+            toast(error.message);
+        }
+
+        // createUser(email, password).then(res => {
+        //     const user = res.user;
+        //     updateUser({
+        //         displayName: name,
+        //         photoURL: photo
+        //     }).then(() => {
+        //         setUser({ ...user, displayName: name, photoURL: photo });
+        //     }).catch((error) => {
+        //         toast(error);
+        //         setUser(user);
+        //     });
+
+        //     toast("Registered Successfully!");
+        //     navigate("/");
+        // }).catch((error) => {
+        //     const errorMessage = error.message;
+        //     toast(errorMessage);
+        // });
 
     }
     return (
@@ -93,8 +126,8 @@ const Register = () => {
                                     <label className="email">Email</label>
                                     <input name="email" type="email" className="input" placeholder="Email" required />
 
-                                    <label className="photo">Photo URL</label>
-                                    <input name="photo" type="url" className="input" placeholder="Photo URL" required />
+                                    <label className="photo">Photo</label>
+                                    <input name="photo" type="file" className="file-input" required />
                                     <label className="password">Password</label>
                                     <input name="password" type="password" className="input" placeholder="Password" required />
                                     {

@@ -2,7 +2,7 @@ import React, { use, useState } from 'react';
 import { AuthContext } from '../Provider/AuthProvider';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router';
-import { motion,useScroll } from 'motion/react';
+import { motion, useScroll } from 'motion/react';
 
 
 const UpdateProfile = () => {
@@ -13,20 +13,40 @@ const UpdateProfile = () => {
 
     const { scrollYProgress } = useScroll();
 
-    const handleUpdate = (e) => {
+    const handleUpdate = async (e) => {
         e.preventDefault();
         // console.log(user);
         const form = e.target;
         const name = form.name.value;
-        const photo = form.photo.value;
+        const photoFile = form.photo.files[0];
 
         const updatedData = {};
         if (name)
             updatedData.displayName = name;
-        if (photo)
-            updatedData.photoURL = photo;
+        if (photoFile) {
+            try {
+                const formData = new FormData();
+                formData.append("image", photoFile);
 
-        if (!name && !photo) {
+                const imgbb = import.meta.env.VITE_image_host;
+
+                const res = await fetch(`https://api.imgbb.com/1/upload?key=${imgbb}`, {
+                    method: "POST",
+                    body: formData
+                });
+
+                const data = await res.json();
+
+                const photoURL = data.data.url;
+                updatedData.photoURL=photoURL;
+            }
+            catch (error) {
+                toast("Failed to update profile: "+ error.message);
+                return;
+            }
+        }
+
+        if (!name && !photoFile) {
             setOptions("Fill at least one field to update.");
             return;
         }
@@ -34,11 +54,11 @@ const UpdateProfile = () => {
             setOptions("");
 
         updateUser(updatedData).then(() => {
-            setUser({ ...user, displayName: name || user.displayName, photoURL: photo || user.photoURL });
+            setUser({ ...user, displayName: name || user.displayName, photoURL: updatedData.photoURL || user.photoURL });
             toast("Profile updated successfully!")
             navigate("/profile");
         }).catch((error) => {
-            toast("Failed to update profile: ", error.message);
+            toast("Failed to update profile: "+ error.message);
         });
 
     }
@@ -68,8 +88,8 @@ const UpdateProfile = () => {
                             <fieldset className="fieldset">
                                 <label className="label">Name</label>
                                 <input name="name" type="text" className="input" placeholder="Name" />
-                                <label className="label">Photo URL</label>
-                                <input name="photo" type="URL" className="input" placeholder="Photo URL" />
+                                <label className="label">Photo</label>
+                                <input name="photo" type="file" className="file-input" />
                                 {
                                     options && <p className='text-xs text-red-500'>{options}</p>
                                 }
