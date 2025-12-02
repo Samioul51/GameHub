@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 const Event = ({ event }) => {
-    const { title, coverPhoto, location, website, attendence, pricePass, date } = event;
+    const { title, coverPhoto, location, website,  pricePass, date } = event;
     return (
         <div className='w-full max-w-[317px] flex flex-col p-[16px] box-border bg-white inter rounded-[8px] shadow-lg mx-auto'>
             <img src={coverPhoto} className='w-full max-w-[285px] h-[285px] rounded-[8px] mb-[16px] border border-gray-500' />

@@ -4,6 +4,7 @@ import PopularGames from '../Components/PopularGames';
 import Newsletter from '../Components/Newsletter';
 import { motion, useScroll } from 'motion/react';
 import Events from '../Components/Events';
+import Partners from '../Components/Partners';
 
 const dataPromise = fetch('/data.json').then(res => res.json());
 const eventsPromise = fetch('/events.json').then(res => res.json());
@@ -34,6 +35,7 @@ const Home = () => {
                 <Banner />
                 <PopularGames games={games} />
                 <Events events={events} />
+                <Partners/>
                 <Newsletter />
             </div>
         </>
