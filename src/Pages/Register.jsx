@@ -15,7 +15,9 @@ const Register = () => {
 
     const handleGoogleRegister = () => {
         signInWithGoogle().then((res) => {
-            toast("Logged in with Google!");
+            if(!res)
+                return;
+            toast("Signed up with Google!");
             navigate(`${location.state ? location.state : "/"}`);
         }).catch((error) => {
             const errorCode = error.code;
@@ -76,26 +78,6 @@ const Register = () => {
         catch(error){
             toast(error.message);
         }
-
-        // createUser(email, password).then(res => {
-        //     const user = res.user;
-        //     updateUser({
-        //         displayName: name,
-        //         photoURL: photo
-        //     }).then(() => {
-        //         setUser({ ...user, displayName: name, photoURL: photo });
-        //     }).catch((error) => {
-        //         toast(error);
-        //         setUser(user);
-        //     });
-
-        //     toast("Registered Successfully!");
-        //     navigate("/");
-        // }).catch((error) => {
-        //     const errorMessage = error.message;
-        //     toast(errorMessage);
-        // });
-
     }
     return (
         <>
