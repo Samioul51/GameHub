@@ -36,6 +36,8 @@ const Login = () => {
 
     const handleGoogleLogin = () => {
         signInWithGoogle().then((res) => {
+            if(!res)
+                return;
             toast("Logged in with Google!");
             navigate(`${location.state ? location.state : "/"}`);
         }).catch((error) => {

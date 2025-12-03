@@ -25,9 +25,19 @@ const AuthProvider = ({children}) => {
 
     // google login
 
-    const signInWithGoogle=()=>{
+    const signInWithGoogle= async ()=>{
         setLoading(true);
-        return signInWithPopup(auth,googleProvider);
+        try{
+            return await signInWithPopup(auth,googleProvider);
+        }
+        catch(error){
+            if(error.code==="auth/popup-closed-by-user"){
+                setLoading(false);
+                return null;
+            }
+            setLoading(false);
+            throw error;
+        }
     }
 
     // Reset Password
